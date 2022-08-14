@@ -1,23 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import axios from "axios";
+import { useEffect } from "react";
+import Product from "./components/product";
+import Cart from "./components/cart";
 
 function App() {
+  const fetchProducts = async () => {
+    const { data } = await axios.get("https://dummyjson.com/products");
+    console.log(data);
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ display: "flex" }}>
+      <Product />
+      <Cart />
     </div>
   );
 }
